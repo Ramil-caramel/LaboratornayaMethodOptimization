@@ -230,7 +230,6 @@ func (simptab *SimplexTable) CheckOptimized() bool {
 func (simptab *SimplexTable) DoSimplexMethod() {
 
 	checkTable := simptab.DeepCopy()
-
 	simptab.FindSupportSolution()
 
 	var count int = 1
@@ -310,6 +309,11 @@ func (simptab *SimplexTable) DoSimplexMethod() {
 		fmt.Println()
 
 	}
+	simptab.getAnswerAndCheck(checkTable)
+
+}
+
+func(simptab *SimplexTable) getAnswerAndCheck( checkTable *SimplexTable){
 
 	finalOtvet := make(map[string]float64)
 
@@ -399,4 +403,3 @@ func (simptab *SimplexTable) DoSimplexMethod() {
 		fmt.Printf("%s = %.4g  (правая часть: %.4g)\n", lhs, sum, simptab.Table[len(simptab.Table)-1][0])
 	}
 }
-
