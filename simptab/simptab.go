@@ -18,7 +18,7 @@ func (simptab SimplexTable) Print(rowPrint int, colPrint int) { // -1 без п�
 	red := "\033[31m"
 	reset := "\033[0m"
 
-	fmt.Printf("%-4s", "B\\F") // вывод верхней части
+	fmt.Printf("%-4s", "B\\F") // вывод свободных переменных
 	for i, val := range simptab.Headers {
 		if i == colPrint {
 			fmt.Printf("%s%8s%s", red, val, reset)
@@ -60,7 +60,7 @@ func (simptab SimplexTable) MakeKanonView() {
 			val = -val
 		}
 		if j == 0 {
-			continue //свободный член
+			continue //пропускаем свободный член
 		}
 		if val == 0 {
 			continue
@@ -92,7 +92,7 @@ func (simptab SimplexTable) MakeKanonView() {
 					continue
 				}
 				if element == 0 {
-					continue //hkkkewhfxdtfyghjkl;jiordthesgfghjk;julhyturdgs
+					continue 
 				}
 
 				if !first {
@@ -105,7 +105,7 @@ func (simptab SimplexTable) MakeKanonView() {
 				} else {
 					// первый элемент — без ведущего "+"
 					if element < 0 {
-						fmt.Print("- ")
+						fmt.Print(" - ")
 						element = -element
 					}
 					first = false
@@ -196,7 +196,7 @@ func (simptab SimplexTable) CheckSupportSolution() bool {
 	return true
 }
 
-func (simptab *SimplexTable) FindSupportSolution() bool {
+func (simptab *SimplexTable) FindSupportSolution() bool {// додделать
 
 	fmt.Println("Оппорное решение: ")
 	for i, h := range simptab.Headers {
@@ -262,13 +262,13 @@ func (simptab *SimplexTable) DoSimplexMethod() {
 		max = math.MaxFloat64
 		// первый столбец это столбец начальных ограничений
 		for i, val := range simptab.Table {
-			if i != sizeTable-1 && val[razrech_stolb] > 0 && val[0] > 0 && val[0]/val[razrech_stolb] < max { //!? чтобы случайно не попасть в последнюю строчку с функцией
+			if i != sizeTable-1 && val[razrech_stolb] > 0 && val[0] > 0 && val[0]/val[razrech_stolb] < max { 
 				max = val[0] / val[razrech_stolb]
 				razrech_string = i
 			}
 		}
 
-		if max == math.MaxFloat64 { // если оазрешающей строки нет, то есть все элементы отрицательные
+		if max == math.MaxFloat64 { // если разрешающей строки нет
 			fmt.Println("Решения нет")
 			return
 		}
